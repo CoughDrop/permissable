@@ -97,7 +97,7 @@ module Permissable
     end
   
     def permissions_for(user, relevant_scopes=nil)
-      relevant_scopes ||= self.permission_scopes if self.respond_to?(:permission_scopes) && self.permission_scopes.length > 0
+      relevant_scopes ||= self.permission_scopes if user && user.respond_to?(:permission_scopes) && user.permission_scopes.length > 0
       relevant_scopes ||= self.class.default_permission_scopes
       relevant_scopes += ['*']
       if self.class.allow_cached_permissions
