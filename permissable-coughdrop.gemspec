@@ -5,7 +5,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'rspec'
   s.add_development_dependency 'ruby-debug'
 
-  s.version     = '0.1'
+  s.version     = '0.2'
   s.date        = '2017-10-03'
   s.summary     = "Permissable"
   s.extra_rdoc_files = %W(LICENSE)
