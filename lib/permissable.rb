@@ -71,7 +71,7 @@ module Permissable
     def allows?(user, action, relevant_scopes=nil)
       relevant_scopes ||= user.permission_scopes if user && user.respond_to?(:permission_scopes)
       relevant_scopes ||= self.class.default_permission_scopes
-      relevant_scopes += ['*']
+      relevant_scopes += ['*'] unless relevant_scopes == ['none']
       if self.class.allow_cached_permissions
         # check for an existing result keyed off the record's id and updated_at
         permissions = permissions_for(user, relevant_scopes)
@@ -100,7 +100,7 @@ module Permissable
     def permissions_for(user, relevant_scopes=nil)
       relevant_scopes ||= user.permission_scopes if user && user.respond_to?(:permission_scopes)
       relevant_scopes ||= self.class.default_permission_scopes
-      relevant_scopes += ['*']
+      relevant_scopes += ['*'] unless relevant_scopes == ['none']
       if self.class.allow_cached_permissions
         cache_key = (user && user.cache_key) || "nobody"
         cache_key += "/scopes_#{relevant_scopes.join(',')}"

@@ -7,4 +7,4 @@ group :test do
   gem 'rspec', :require => "spec"
 end
 
-ruby "2.3.3"
+ruby "2.6.6"

@@ -5,8 +5,8 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'rspec'
   s.add_development_dependency 'ruby-debug'
 
-  s.version     = '0.3.2'
-  s.date        = '2017-10-03'
+  s.version     = '0.3.3'
+  s.date        = '2021-06-02'
   s.summary     = "Permissable"
   s.extra_rdoc_files = %W(LICENSE)
   s.homepage = %q{http://github.com/CoughDrop/permissable}
