@@ -250,6 +250,40 @@ describe Permissable do
       })
     end
 
+    it "should allow none-defined permissions if scope is set to 'none'" do
+      PermitObject.add_permissions('jump', ['none']) { true }
+      PermitObject.add_permissions('jump', ['*']) { true }
+      PermitObject.add_permissions('fly', 'jump') { true }
+      obj = PermitObject.new
+      expect(obj.permissions_for(nil, [])).to eq({
+        'user_id' => nil,
+        'jump' => true,
+        'fly' => false
+      })
+      expect(obj.permissions_for(nil, ['none'])).to eq({
+        'user_id' => nil,
+        'jump' => true,
+        'fly' => false
+      })
+    end
+
+    it "should allow none-defined permissions if scope is set to 'none' (switch order)" do
+      PermitObject.add_permissions('jump', ['*']) { true }
+      PermitObject.add_permissions('jump', ['none']) { true }
+      PermitObject.add_permissions('fly', 'jump') { true }
+      obj = PermitObject.new
+      expect(obj.permissions_for(nil, [])).to eq({
+        'user_id' => nil,
+        'jump' => true,
+        'fly' => false
+      })
+      expect(obj.permissions_for(nil, ['none'])).to eq({
+        'user_id' => nil,
+        'jump' => true,
+        'fly' => false
+      })
+    end
+
     it "should persist a cache of the permissions if enabled" do
       PermitObject.cache_permissions
       PermitObject.add_permissions('jump', ['*']) { true }

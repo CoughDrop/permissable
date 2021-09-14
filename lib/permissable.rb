@@ -114,7 +114,7 @@ module Permissable
       granted_permissions.with_indifferent_access if granted_permissions.respond_to?(:with_indifferent_access)
       
       self.class.permissions_lookup.each do |actions, block, allowed_scopes|
-        already_granted = granted_permissions.keys
+        already_granted = granted_permissions.select{|k, v| v == true }.map(&:first)
         next if block.arity == 1 && !user
         next if actions - already_granted == []
         if instance_exec(user, &block)
